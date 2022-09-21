@@ -1,0 +1,5 @@
+{
+  "plugins": ["sonarjs"],
+  "extends": ["next/core-web-vitals", "plugin:sonarjs/recommended"],
+  "parser": "@typescript-eslint/parser"
+}
