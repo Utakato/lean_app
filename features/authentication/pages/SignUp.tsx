@@ -1,9 +1,16 @@
 import { Button, Card, Divider, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 import { makeStyles } from "tss-react/mui";
+import { routes } from "../../../core/routes/routes";
 
 export const SignUpPage = () => {
   const { classes } = useStyles();
+  const router = useRouter();
+
+  const handleRedirect = () => {
+    router.push(routes.login);
+  };
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
@@ -15,10 +22,16 @@ export const SignUpPage = () => {
           <TextField variant="outlined" label="Password" />
           <TextField variant="outlined" label="Confirm password" />
           <Button variant="contained" className={classes.btn}>
-            Signup
+            Create account
           </Button>
-          <Button variant="outlined" className={classes.btn}>
-            Cancel
+          <Button
+            variant="text"
+            className={classes.btn}
+            onClick={handleRedirect}
+          >
+            <Typography className={classes.textBtn}>
+              I already have an account
+            </Typography>
           </Button>
         </form>
       </Card>
@@ -39,7 +52,7 @@ const useStyles = makeStyles()((theme) => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: theme.spacing(2),
+    gap: theme.spacing(3),
   },
   card: {
     width: "100%",
@@ -55,5 +68,8 @@ const useStyles = makeStyles()((theme) => ({
   heading: {
     marginBottom: theme.spacing(3),
     textAlign: "center",
+  },
+  textBtn: {
+    textTransform: "none",
   },
 }));

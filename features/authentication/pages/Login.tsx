@@ -1,9 +1,15 @@
 import { Button, Card, Divider, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 import { makeStyles } from "tss-react/mui";
+import { routes } from "../../../core/routes/routes";
 
 export const LoginPage = () => {
   const { classes, cx } = useStyles();
+  const router = useRouter();
+  const handleRedirect = () => {
+    router.push(routes.register);
+  };
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
@@ -16,6 +22,15 @@ export const LoginPage = () => {
           <Button variant="contained" className={classes.btn}>
             Login
           </Button>
+          <Button
+            variant="text"
+            className={classes.btn}
+            onClick={handleRedirect}
+          >
+            <Typography className={classes.textBtn}>
+              I want to create an account
+            </Typography>
+          </Button>
         </form>
         <Divider>
           <Typography className={classes.secondaryText}>OR</Typography>
@@ -26,6 +41,7 @@ export const LoginPage = () => {
             height: "100%",
             display: "flex",
             flexDirection: "column",
+            gap: "16px",
             marginTop: "16px",
           }}
         >
@@ -34,6 +50,12 @@ export const LoginPage = () => {
             className={cx(classes.btn, classes.googleLogin)}
           >
             Continue with Google
+          </Button>
+          <Button
+            variant="outlined"
+            className={cx(classes.btn, classes.facebookLogin)}
+          >
+            Continue with Facebook
           </Button>
         </div>
       </Card>
@@ -75,8 +97,15 @@ const useStyles = makeStyles()((theme) => ({
   secondaryText: {
     color: theme.palette.text.secondary,
   },
+  textBtn: {
+    textTransform: "none",
+  },
   googleLogin: {
     color: theme.palette.text.secondary,
     borderColor: theme.palette.text.secondary,
+  },
+  facebookLogin: {
+    backgroundColor: "lightBlue",
+    color: "#fff",
   },
 }));
