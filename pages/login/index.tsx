@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { LoginPage } from "../../features/authentication/pages/Login";
+import { LoginPage } from "../../features/authentication/pages/login/LoginPage";
 
-const Register: NextPage = () => {
+const Login: NextPage = () => {
   return <LoginPage />;
 };
 
-export default Register;
+export default Login;

@@ -2,18 +2,16 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material";
 import { appTheme } from "../core/theme/theme";
-import { createEmotionCache } from "../core/theme/emotionCache";
-import { CacheProvider } from "@emotion/react";
-
-const emotionCache = createEmotionCache();
+import { Provider } from "react-redux";
+import { store } from "../core/redux/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CacheProvider value={emotionCache}>
+    <Provider store={store}>
       <ThemeProvider theme={appTheme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </CacheProvider>
+    </Provider>
   );
 }
 

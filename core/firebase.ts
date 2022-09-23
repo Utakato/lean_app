@@ -15,6 +15,6 @@ const firebaseConfig = {
   measurementId: publicRuntimeConfig.measurementId,
 };
 
-const app = initializeApp(firebaseConfig);
-export const firestore = getFirestore(app);
+export const firebaseApp = initializeApp(firebaseConfig);
+export const firestore = getFirestore(firebaseApp);
 // const analytics = getAnalytics(app);
