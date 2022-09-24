@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { ForgotPasswordPage } from "../../features/authentication/pages/forgot-password/ForgotPassword";
+import { ForgotPasswordPage } from "../../features/authentication/pages";
 
 const ForgotPassword: NextPage = () => {
   return <ForgotPasswordPage />;

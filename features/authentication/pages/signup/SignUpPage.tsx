@@ -78,6 +78,7 @@ export const SignUpPage = () => {
           <TextField
             variant="outlined"
             label="Confirm password"
+            type="password"
             {...register("confirmPassword")}
           />
           <Typography variant="h5" className="text-error ml-6 ">

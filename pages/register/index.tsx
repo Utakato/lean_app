@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { SignUpPage } from "../../features/authentication/pages/signup/SignUpPage";
+import { SignUpPage } from "../../features/authentication/pages";
 
 const Register: NextPage = () => {
   return <SignUpPage />;
