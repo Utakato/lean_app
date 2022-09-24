@@ -97,7 +97,7 @@ export const ForgotPasswordPage: React.FC = () => {
       </Card>
       <Dialog open={modalOpen} onClose={handleModalClose}>
         <DialogTitle>
-          <Typography variant="h4">Email sent succesfully!</Typography>
+          <Typography className="text-xl">Email sent succesfully!</Typography>
         </DialogTitle>
         <DialogContentText className="px-6">
           You will receive an email with a password reset link.
