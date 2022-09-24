@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
 import { routes } from "../../../../core/routes/routes";
 import { loginAction } from "../../redux/thunkActions";
 import { LoginData } from "../../redux/types";
-import { signUpSchema } from "../signup/SignUpSchema";
 import { loginSchema } from "./LoginSchema";
 
 const defaultValues = {
@@ -71,7 +70,11 @@ export const LoginPage: React.FC = () => {
             type="password"
             {...register("password")}
           />
-          <Button type="submit" variant="contained" className="h-14 text-base">
+          <Button
+            type="submit"
+            variant="contained"
+            className="h-14 text-base mt-4"
+          >
             Login
           </Button>
           <div className="flex flex-col items-center">
@@ -95,7 +98,7 @@ export const LoginPage: React.FC = () => {
             </Button>
           </div>
         </form>
-        <Divider>
+        {/* <Divider>
           <Typography className="text-textSecondary">OR</Typography>
         </Divider>
         <div className="w-full h-full flex flex-col gap-4 mt-4">
@@ -108,7 +111,7 @@ export const LoginPage: React.FC = () => {
           <Button variant="outlined" className="h-14 text-base text-white">
             Continue with Facebook
           </Button>
-        </div>
+        </div> */}
       </Card>
     </div>
   );
