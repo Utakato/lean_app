@@ -21,7 +21,7 @@ module.exports = {
         success: "#2DC653",
         black: "#001204",
         white: "#FAFFFB",
-        textSecondary: "#4F4F4F",
+        textSecondary: "#A6ADAA",
       },
     },
     boxShadow: {
