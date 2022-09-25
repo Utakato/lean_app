@@ -19,7 +19,7 @@ export const FormButtons: React.FC<FormButtonsProps> = ({
       <Button variant="outlined" onClick={secondaryHandler}>
         {secondaryText}
       </Button>
-      <Button variant="contained" onClick={primaryHandler}>
+      <Button variant="contained" type="submit" onClick={primaryHandler}>
         {primaryText}
       </Button>
     </div>
