@@ -4,13 +4,15 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 import {
   ForgotPasswordData,
   LoginData,
   SignUpData,
+  SignUpReturnDTO,
 } from "../../features/authentication/redux/types";
-import { firebaseApp } from "../firebase";
+import { db, firebaseApp } from "../firebase";
 
 const auth = getAuth(firebaseApp);
 
@@ -52,4 +54,11 @@ export const forgotPassword = async (
   } catch (e) {
     return e;
   }
+};
+
+export const addNewUser = async (userId: string) => {
+  const userRef = doc(db, "users", userId);
+  return await setDoc(userRef, {
+    uid: userId,
+  });
 };

@@ -1,6 +1,5 @@
 import getConfig from "next/config";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const { publicRuntimeConfig } = getConfig();
@@ -16,5 +15,5 @@ const firebaseConfig = {
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
-export const firestore = getFirestore(firebaseApp);
+export const db = getFirestore(firebaseApp);
 // const analytics = getAnalytics(app);

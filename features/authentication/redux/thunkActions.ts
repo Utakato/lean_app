@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addNewUser,
   forgotPassword,
   login,
   register,
@@ -12,7 +13,7 @@ export const signUpAction = createAsyncThunk(
     try {
       const res = await register(signUpData);
       console.log(res);
-      return res;
+      const res2 = await addNewUser(res.uid);
     } catch (e) {
       console.log(e);
       return e;
