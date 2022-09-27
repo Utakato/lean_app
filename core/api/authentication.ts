@@ -4,7 +4,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { userInfo } from "os";
 
 import {
   ForgotPasswordData,
@@ -57,8 +58,29 @@ export const forgotPassword = async (
 };
 
 export const addNewUser = async (userId: string) => {
-  const userRef = doc(db, "users", userId);
-  return await setDoc(userRef, {
-    uid: userId,
-  });
+  console.log(userId);
+  try {
+    const userRef = doc(db, "users", userId);
+    console.log(userRef);
+
+    const res = await setDoc(userRef, {
+      uid: userId,
+    });
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Just implemented this, you need to call this after registration/login/ whenever you update the user.
+export const getUser = async (userId: string) => {
+  console.log(userId);
+  try {
+    const userRef = doc(db, "users", userId);
+    const res = await getDoc(userRef);
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
 };

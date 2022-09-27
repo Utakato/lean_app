@@ -6,7 +6,7 @@ import { routes } from "../../../../core/routes/routes";
 import { signUpSchema } from "./SignUpSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
-import { signUpAction } from "../../redux/thunkActions";
+import { getUserAction, signUpAction } from "../../redux/thunkActions";
 import { ThunkStatuses } from "../../../../core/constants/RequestStatuses";
 
 interface SignUpFormData {
@@ -25,7 +25,9 @@ export const SignUpPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { registrationStatus } = useAppSelector((root) => root.authentication);
+  const { registrationStatus, uid } = useAppSelector(
+    (root) => root.authentication
+  );
 
   const {
     register,
@@ -38,6 +40,10 @@ export const SignUpPage = () => {
       router.push("/");
     }
   }, [registrationStatus]);
+
+  useEffect(() => {
+    dispatch(getUserAction(uid));
+  }, [uid]);
 
   const handleRedirect = () => {
     router.push(routes.login);
