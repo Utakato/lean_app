@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { firebaseApp } from "../../../core/firebase";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
-import { setUser, getUserAction } from "../redux";
+import { setUserId, getUserAction } from "../redux";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -18,17 +18,19 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (usr) => {
       if (usr) {
         console.log("user already logged in");
-        dispatch(setUser(usr.uid));
+        dispatch(setUserId(usr.uid));
       } else {
         console.log("user not logged in");
-        dispatch(setUser(""));
+        dispatch(setUserId(""));
       }
     });
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    dispatch(getUserAction(uid));
+    if (uid) {
+      dispatch(getUserAction(uid));
+    }
   }, [uid]);
 
   return <>{children}</>;

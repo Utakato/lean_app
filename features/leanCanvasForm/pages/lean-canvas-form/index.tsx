@@ -1,6 +1,6 @@
 import { TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppWrapper,
   FormButtons,
@@ -11,7 +11,8 @@ import {
 import { addNewIdeaField } from "../../../../core/api/lean-canvas";
 
 import { leanCanvasQuestions } from "../../../../core/constants/LeanCanvasQuestions";
-import { useAppSelector } from "../../../../core/redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
+import { getUserAction, getUserIdeasAction } from "../../../authentication";
 import { LeanCanvasCongratulationsScreen } from "./components/LeanCanvasCongratulationsScreen";
 
 enum inputType {
@@ -29,6 +30,7 @@ const createPayload = (key: string, value: string) => {
 
 export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [step, setStep] = useState(0);
   const [value, setValue] = useState("");
   const [displayCongratulationsScreen, setDisplayCongratulationsScreen] =
@@ -41,6 +43,12 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const totalQuestionsCount = leanCanvasQuestions.length;
   const inputIsEmpty = value.length === 0;
   const { ideaId } = router.query;
+
+  useEffect(() => {
+    if (uid) {
+      dispatch(getUserIdeasAction(uid));
+    }
+  }, [uid]);
 
   const handlePrimary = async (e: any) => {
     if (step === totalQuestionsCount - 1) {

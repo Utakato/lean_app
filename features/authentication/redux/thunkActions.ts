@@ -3,6 +3,7 @@ import {
   addNewUser,
   forgotPassword,
   getUser,
+  getUserIdeas,
   login,
   register,
 } from "../../../core/api/authentication";
@@ -56,5 +57,12 @@ export const getUserAction = createAsyncThunk(
   "authentication/getUser",
   async (uid: string) => {
     return await getUser(uid);
+  }
+);
+
+export const getUserIdeasAction = createAsyncThunk(
+  "authentication/getUserIdeas",
+  async (uid: string) => {
+    return await getUserIdeas(uid);
   }
 );

@@ -6,9 +6,10 @@ import { routes } from "../../../../../core/routes/routes";
 
 export const LeanCanvasCongratulationsScreen: React.FC = () => {
   const router = useRouter();
+
   const handleDashboardRedirect = () => {
-    router.push(routes.dashboard);
-    console.log("go to dashboard");
+    const { ideaId } = router.query;
+    router.push(routes.ideaDashboard(ideaId as string));
   };
   const handleEditLeanCanvas = () => {
     console.log("tba");

@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
 
 import {
   ForgotPasswordData,
@@ -56,10 +56,8 @@ export const forgotPassword = async (
 };
 
 export const addNewUser = async (userId: string) => {
-  console.log(userId);
   try {
     const userRef = doc(db, "users", userId);
-    console.log(userRef);
 
     const res = await setDoc(userRef, {
       uid: userId,
@@ -77,7 +75,25 @@ export const getUser = async (userId: string) => {
   try {
     const userRef = doc(db, "users", userId);
     const res = await getDoc(userRef);
+    console.log(res.data());
+    return res.data();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getUserIdeas = async (userId: string) => {
+  console.log(userId);
+  try {
+    const userRef = doc(db, "users", userId);
+    const res = await getDocs(collection(db, "users", userId, "ideas"));
     console.log(res);
+    let allIdeas: any[] = [];
+    res.forEach((doc) => {
+      console.log(doc.data());
+      allIdeas.push(doc.data());
+    });
+    console.log(allIdeas);
   } catch (err) {
     console.log(err);
   }

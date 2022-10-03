@@ -42,7 +42,5 @@ export const addNewIdeaField = async (data: AddNewIdeaFieldPayload) => {
 
   const ideaRef = doc(db, `users/${userId}/ideas/${ideaId}`);
 
-  const docRef = await setDoc(ideaRef, formattedData, { merge: true });
-  console.log(docRef);
-  return docRef;
+  return await setDoc(ideaRef, formattedData, { merge: true });
 };

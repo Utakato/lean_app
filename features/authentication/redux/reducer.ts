@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThunkStatuses } from "../../../core/constants/RequestStatuses";
 import {
   forgotPasswordAction,
+  getUserAction,
+  getUserIdeasAction,
   loginAction,
   signUpAction,
 } from "./thunkActions";
@@ -13,17 +15,27 @@ const initialState = {
   forgotPasswordStatus: "idle",
   email: "",
   uid: "",
+  user: {},
 };
 
 export const authenticationSlice = createSlice({
   name: "authentication",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<string>) => {
+    setUserId: (state, action: PayloadAction<string>) => {
       state.uid = action.payload;
     },
+    // setUser: (state, action) => {
+    //   state.user = action.payload;
+    // },
   },
   extraReducers: (builder) => {
+    builder.addCase(getUserIdeasAction.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(getUserAction.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
     builder.addCase(signUpAction.fulfilled, (state, action) => {
       const payload = action.payload as SignUpReturnDTO;
       state.registrationStatus = ThunkStatuses.FULLFILLED;
@@ -44,4 +56,4 @@ export const authenticationSlice = createSlice({
   },
 });
 
-export const { setUser } = authenticationSlice.actions;
+export const { setUserId } = authenticationSlice.actions;

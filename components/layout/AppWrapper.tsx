@@ -10,7 +10,6 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => setWindowHeight(window.innerHeight);
-    console.log(window.innerHeight);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -21,7 +20,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         minHeight: windowHeight ? windowHeight : "100vh",
       }}
       className={`
-       bg-white overflow-y-scroll flex flex-col justify-center items-center px-8 py-20`}
+       bg-white overflow-y-scroll flex flex-col w-full px-8 py-20 `}
     >
       {children}
     </div>
