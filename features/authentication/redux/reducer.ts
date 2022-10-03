@@ -1,6 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThunkStatuses } from "../../../core/constants/RequestStatuses";
-import { forgotPasswordAction, loginAction, signUpAction } from "./thunkActions";
+import {
+  forgotPasswordAction,
+  loginAction,
+  signUpAction,
+} from "./thunkActions";
 import { LoginReturnDTO, SignUpReturnDTO } from "./types";
 
 const initialState = {
@@ -14,7 +18,11 @@ const initialState = {
 export const authenticationSlice = createSlice({
   name: "authentication",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<string>) => {
+      state.uid = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(signUpAction.fulfilled, (state, action) => {
       const payload = action.payload as SignUpReturnDTO;
@@ -35,3 +43,5 @@ export const authenticationSlice = createSlice({
     });
   },
 });
+
+export const { setUser } = authenticationSlice.actions;

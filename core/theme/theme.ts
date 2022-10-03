@@ -82,6 +82,10 @@ appTheme.components = {
         height: "56px",
         borderRadius: "50px",
       },
+      multiline: {
+        height: "unset",
+        borderRadius: "8px",
+      },
     },
   },
   MuiCard: {

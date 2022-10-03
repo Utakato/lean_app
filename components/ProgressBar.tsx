@@ -17,11 +17,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const progressInfo = `${prefix}${current}/${total} Completed`;
 
   return (
-    <div className="w-full">
-      <Typography variant="body2" className={"text-textSecondary leading-5"}>
+    <div className="w-full ">
+      <Typography variant="body2" className={"text-black leading-5"}>
         {progressInfo}
       </Typography>
-      <Box className="w-full">
+      <Box className="w-full mt-2">
         <LinearProgress
           variant="determinate"
           value={value}

@@ -25,9 +25,7 @@ export const SignUpPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { registrationStatus, uid } = useAppSelector(
-    (root) => root.authentication
-  );
+  const { registrationStatus } = useAppSelector((root) => root.authentication);
 
   const {
     register,
@@ -40,10 +38,6 @@ export const SignUpPage = () => {
       router.push("/");
     }
   }, [registrationStatus]);
-
-  useEffect(() => {
-    dispatch(getUserAction(uid));
-  }, [uid]);
 
   const handleRedirect = () => {
     router.push(routes.login);

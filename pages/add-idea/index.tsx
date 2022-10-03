@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
+import { AuthWrapper } from "../../features";
 import { AddFirstIdeaPage } from "../../features/leanCanvasForm/pages/add-first-idea";
 
-const ForgotPassword: NextPage = () => {
-  return <AddFirstIdeaPage />;
+const AddFirstIdea: NextPage = () => {
+  return (
+    <AuthWrapper>
+      <AddFirstIdeaPage />
+    </AuthWrapper>
+  );
 };
 
-export default ForgotPassword;
+export default AddFirstIdea;

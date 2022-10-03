@@ -1,11 +1,13 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
 
 interface FormButtonsProps {
   primaryText: string;
   secondaryText: string;
-  primaryHandler: () => void;
+  primaryHandler: (e: any) => void;
   secondaryHandler: () => void;
+  formId: string;
+  disabledPrimary: boolean;
 }
 
 export const FormButtons: React.FC<FormButtonsProps> = ({
@@ -13,14 +15,27 @@ export const FormButtons: React.FC<FormButtonsProps> = ({
   secondaryText,
   primaryHandler,
   secondaryHandler,
+  disabledPrimary,
+  formId,
 }) => {
   return (
     <div className="flex justify-between w-full">
-      <Button variant="outlined" onClick={secondaryHandler}>
-        {secondaryText}
+      <Button
+        variant="outlined"
+        onClick={secondaryHandler}
+        className="w-5/12 flex justify-center items-center"
+      >
+        <Typography variant="h4">{secondaryText}</Typography>
       </Button>
-      <Button variant="contained" type="submit" onClick={primaryHandler}>
-        {primaryText}
+      <Button
+        variant="contained"
+        type="submit"
+        form={formId}
+        className="w-5/12 flex justify-center items-center"
+        disabled={disabledPrimary}
+        onClick={primaryHandler}
+      >
+        <Typography variant="h4">{primaryText}</Typography>
       </Button>
     </div>
   );

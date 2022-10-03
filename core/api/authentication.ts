@@ -4,14 +4,12 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { userInfo } from "os";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 import {
   ForgotPasswordData,
   LoginData,
   SignUpData,
-  SignUpReturnDTO,
 } from "../../features/authentication/redux/types";
 import { db, firebaseApp } from "../firebase";
 

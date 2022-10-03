@@ -11,12 +11,13 @@ import {
   DialogActions,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ThunkStatuses } from "../../../../core/constants/RequestStatuses";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
 import { routes } from "../../../../core/routes/routes";
-import { forgotPasswordAction } from "../../redux/thunkActions";
+import { AuthWrapper } from "../../components";
+import { forgotPasswordAction } from "../../redux";
 import { forgotPasswordSchema } from "./ForgotPasswordSchema";
 
 interface ForgotPasswordFormData {
@@ -70,44 +71,54 @@ export const ForgotPasswordPage: React.FC = () => {
     router.push(routes.login);
   };
   return (
-    <div className="bg-secondary w-screen h-screen flex justify-center items-center px-4">
-      <Card className="w-full p-8">
-        <Typography variant="h2" className="mb-6 text-center">
-          Forgot password
-        </Typography>
-        <form
-          onSubmit={handleSubmit((data) => submitHandler(data))}
-          className="flex flex-col gap-6 mb-4"
-        >
-          <TextField variant="outlined" label="Email" {...register("email")} />
-          <Typography variant="h5" className="text-error ml-6 ">
-            {errors.email?.message}
+    <AuthWrapper>
+      <div className="bg-secondary w-screen h-screen flex justify-center items-center px-4">
+        <Card className="w-full p-8">
+          <Typography variant="h2" className="mb-6 text-center">
+            Forgot password
           </Typography>
-          <Button type="submit" variant="contained" className="h-14 text-base">
-            Send reset password link
-          </Button>
-          <Button
-            variant="text"
-            className="h-14 text-base"
-            onClick={handleRedirect}
+          <form
+            onSubmit={handleSubmit((data) => submitHandler(data))}
+            className="flex flex-col gap-6 mb-4"
           >
-            <Typography className="normal-case">Go back to login</Typography>
-          </Button>
-        </form>
-      </Card>
-      <Dialog open={modalOpen} onClose={handleModalClose}>
-        <DialogTitle>
-          <Typography className="text-xl">Email sent succesfully!</Typography>
-        </DialogTitle>
-        <DialogContentText className="px-6">
-          You will receive an email with a password reset link.
-        </DialogContentText>
-        <DialogActions>
-          <Button variant="contained" onClick={handleModalOk} autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            <TextField
+              variant="outlined"
+              label="Email"
+              {...register("email")}
+            />
+            <Typography variant="h5" className="text-error ml-6 ">
+              {errors.email?.message}
+            </Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              className="h-14 text-base"
+            >
+              Send reset password link
+            </Button>
+            <Button
+              variant="text"
+              className="h-14 text-base"
+              onClick={handleRedirect}
+            >
+              <Typography className="normal-case">Go back to login</Typography>
+            </Button>
+          </form>
+        </Card>
+        <Dialog open={modalOpen} onClose={handleModalClose}>
+          <DialogTitle>
+            <Typography className="text-xl">Email sent succesfully!</Typography>
+          </DialogTitle>
+          <DialogContentText className="px-6">
+            You will receive an email with a password reset link.
+          </DialogContentText>
+          <DialogActions>
+            <Button variant="contained" onClick={handleModalOk} autoFocus>
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </AuthWrapper>
   );
 };
