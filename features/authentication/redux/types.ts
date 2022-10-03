@@ -21,3 +21,20 @@ export interface LoginReturnDTO {
   email: string;
   uid: string;
 }
+
+export interface Idea {
+  id: string;
+  name?: string;
+  leanCanvas: {
+    name?: string;
+    problem?: string;
+    customer?: string;
+    solution?: string;
+    uvp?: string;
+    revenue?: string;
+    channels?: string;
+    keyMetrics?: string;
+    costs?: string;
+    unfairAdvantage?: string;
+  };
+}

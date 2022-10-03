@@ -81,19 +81,23 @@ export const getUser = async (userId: string) => {
     console.log(err);
   }
 };
-
+//  tba types
 export const getUserIdeas = async (userId: string) => {
   console.log(userId);
   try {
-    const userRef = doc(db, "users", userId);
     const res = await getDocs(collection(db, "users", userId, "ideas"));
     console.log(res);
     let allIdeas: any[] = [];
     res.forEach((doc) => {
+      console.log(doc.id);
       console.log(doc.data());
-      allIdeas.push(doc.data());
+      const completeData = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      allIdeas.push(completeData);
     });
-    console.log(allIdeas);
+    return allIdeas;
   } catch (err) {
     console.log(err);
   }

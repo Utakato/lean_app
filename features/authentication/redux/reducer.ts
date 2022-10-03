@@ -9,13 +9,27 @@ import {
 } from "./thunkActions";
 import { LoginReturnDTO, SignUpReturnDTO } from "./types";
 
-const initialState = {
-  registrationStatus: "idle",
-  loginStatus: "idle",
-  forgotPasswordStatus: "idle",
+interface UserWithInfo {
+  ideas: any[];
+}
+interface AuthenticationSlice {
+  registrationStatus: ThunkStatuses;
+  loginStatus: ThunkStatuses;
+  forgotPasswordStatus: ThunkStatuses;
+  email: string;
+  uid: string;
+  user: UserWithInfo;
+}
+
+const initialState: AuthenticationSlice = {
+  registrationStatus: ThunkStatuses.IDLE,
+  loginStatus: ThunkStatuses.IDLE,
+  forgotPasswordStatus: ThunkStatuses.IDLE,
   email: "",
   uid: "",
-  user: {},
+  user: {
+    ideas: [],
+  },
 };
 
 export const authenticationSlice = createSlice({
@@ -32,10 +46,9 @@ export const authenticationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserIdeasAction.fulfilled, (state, action) => {
       console.log(action.payload);
+      state.user.ideas = action.payload as any[];
     });
-    builder.addCase(getUserAction.fulfilled, (state, action) => {
-      console.log(action.payload);
-    });
+    builder.addCase(getUserAction.fulfilled, (state, action) => {});
     builder.addCase(signUpAction.fulfilled, (state, action) => {
       const payload = action.payload as SignUpReturnDTO;
       state.registrationStatus = ThunkStatuses.FULLFILLED;

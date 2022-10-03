@@ -1,6 +1,6 @@
 import { TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   AppWrapper,
   FormButtons,
@@ -12,7 +12,11 @@ import { addNewIdeaField } from "../../../../core/api/lean-canvas";
 
 import { leanCanvasQuestions } from "../../../../core/constants/LeanCanvasQuestions";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
-import { getUserAction, getUserIdeasAction } from "../../../authentication";
+import {
+  getUserAction,
+  getUserIdeasAction,
+  Idea,
+} from "../../../authentication";
 import { LeanCanvasCongratulationsScreen } from "./components/LeanCanvasCongratulationsScreen";
 
 enum inputType {
@@ -36,13 +40,30 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const [displayCongratulationsScreen, setDisplayCongratulationsScreen] =
     useState(false);
 
-  const { uid } = useAppSelector((root) => root.authentication);
+  const { uid, user } = useAppSelector((root) => root.authentication);
 
   const currentQuestion = leanCanvasQuestions[step];
   const isMultiline = currentQuestion.inputType === inputType.MULTILINE;
   const totalQuestionsCount = leanCanvasQuestions.length;
   const inputIsEmpty = value.length === 0;
   const { ideaId } = router.query;
+  const activeIdea = useMemo(
+    () => user.ideas.filter((idea) => idea.id === ideaId)[0],
+    [user.ideas, ideaId]
+  ) as Idea;
+
+  useEffect(() => {
+    if (activeIdea) {
+      if (currentQuestion.fieldName === "name") {
+        const currentAnswer = activeIdea.name;
+        setValue(currentAnswer as string);
+      }
+      if (activeIdea?.leanCanvas[currentQuestion.fieldName]) {
+        const currentAnswer = activeIdea.leanCanvas[currentQuestion.fieldName];
+        setValue(currentAnswer as string);
+      }
+    }
+  }, [activeIdea, currentQuestion]);
 
   useEffect(() => {
     if (uid) {
@@ -64,7 +85,6 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
       };
       console.log(data);
       const res = await addNewIdeaField(data);
-      console.log(res);
       setValue("");
       setStep((s) => s + 1);
     }
