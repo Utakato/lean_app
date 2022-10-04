@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { AppWrapper, Topbar } from "../../../../components";
-import { useAppSelector } from "../../../../core/redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
 import { useRouter } from "next/router";
 import { Typography } from "@mui/material";
 import { BoxButton, ProgressCard } from "./components";
 import { routes } from "../../../../core/routes/routes";
+import { getUserIdeasAction, Idea } from "../../../authentication";
 
 export const IdeaDashboardPage: React.FC = () => {
   const router = useRouter();
-  const { uid } = useAppSelector((root) => root.authentication);
+  const dispatch = useAppDispatch();
+  const { uid, user } = useAppSelector((root) => root.authentication);
+  const { ideaId } = router.query;
+
+  const activeIdea = useMemo(
+    () => user.ideas.filter((idea) => idea.id === ideaId)[0],
+    [user.ideas, ideaId]
+  ) as Idea;
+
+  useEffect(() => {
+    dispatch(getUserIdeasAction(uid));
+  }, []);
 
   const handleLeanCanvasClick = () => {
-    const { ideaId } = router.query;
     router.push(routes.leanCanvas(ideaId as string));
   };
   return (
@@ -20,7 +31,7 @@ export const IdeaDashboardPage: React.FC = () => {
       <AppWrapper>
         <div className="flex flex-col justify-start items-start w-full h-full gap-8">
           <Typography variant="h2" className="text-black font-medium">
-            {"idea name"}
+            {activeIdea.name}
           </Typography>
           <div className="flex w-full gap-4">
             <BoxButton onClick={handleLeanCanvasClick}>
