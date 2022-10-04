@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
 import { AuthWrapper } from "../../../features";
+import { LeanCavnasPage } from "../../../features/leanCanvas/pages/lean-canvas";
 
 const LeanCanvas: NextPage = () => {
-  return <AuthWrapper>{/* leanCanvas page */}</AuthWrapper>;
+  return (
+    <AuthWrapper>
+      <LeanCavnasPage />
+    </AuthWrapper>
+  );
 };
 
 export default LeanCanvas;
