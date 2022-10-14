@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import { IdeaList } from "../features/dashboard/pages/idea-list";
 
 const Home: NextPage = () => {
-  return <div>Firebase Test</div>;
+  return <IdeaList />;
 };
 
 export default Home;
