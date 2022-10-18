@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  signOut,
 } from "firebase/auth";
 import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
 
@@ -41,6 +42,15 @@ export const register = async (signUpData: SignUpData) => {
     email: userCredential.user.email,
     uid: userCredential.user.uid,
   };
+};
+
+export const logOut = async () => {
+  try {
+    await signOut(auth);
+    console.log("succes!");
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const forgotPassword = async (

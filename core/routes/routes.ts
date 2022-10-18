@@ -13,3 +13,9 @@ export const routes = {
   addIdea: "/add-idea",
   addIdeaWithID: (id: string) => `${routes.addIdea}/${id}`,
 };
+
+export const unprotectedRoutes = [
+  routes.register,
+  routes.login,
+  routes.forgotPassword,
+];

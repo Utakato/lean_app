@@ -60,7 +60,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
           setValue(currentAnswer as string);
         }
       } else if (
-        activeIdea.leanCanvas[currentQuestion.fieldName] !== undefined
+        activeIdea.leanCanvas?.[currentQuestion.fieldName] !== undefined
       ) {
         const currentAnswer = activeIdea.leanCanvas[currentQuestion.fieldName];
         if (currentAnswer !== undefined) {
@@ -101,6 +101,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
     } else {
       setStep((s) => s + 1);
     }
+    setValue("");
   };
 
   const onChange = (e: any) => {

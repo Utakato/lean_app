@@ -19,7 +19,7 @@ export const LoginPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { loginStatus } = useAppSelector((root) => root.authentication);
+  const { loginStatus, uid } = useAppSelector((root) => root.authentication);
   const {
     register,
     handleSubmit,
@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
   } = useForm({ defaultValues, resolver: yupResolver(loginSchema) });
 
   useEffect(() => {
-    if (loginStatus === ThunkStatuses.FULLFILLED) {
+    if (loginStatus === ThunkStatuses.FULLFILLED && uid) {
       router.push("/");
     }
   }, [loginStatus]);

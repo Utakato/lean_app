@@ -20,7 +20,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         minHeight: windowHeight ? windowHeight : "100vh",
       }}
       className={`
-       bg-white overflow-y-scroll flex flex-col w-full px-8 py-20 `}
+       bg-white overflow-y-scroll flex flex-col w-full`}
     >
       {children}
     </div>

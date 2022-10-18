@@ -4,12 +4,15 @@ import { ThemeProvider } from "@mui/material";
 import { appTheme } from "../core/theme/theme";
 import { Provider } from "react-redux";
 import { store } from "../core/redux/store";
+import { AuthWrapper } from "../features";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={appTheme}>
-        <Component {...pageProps} />
+        <AuthWrapper>
+          <Component {...pageProps} />
+        </AuthWrapper>
       </ThemeProvider>
     </Provider>
   );

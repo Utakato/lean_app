@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setUserId } from "..";
 import {
   addNewUser,
   forgotPassword,
   getUser,
   getUserIdeas,
   login,
+  logOut,
   register,
 } from "../../../core/api/authentication";
 import { ForgotPasswordData, LoginData, SignUpData } from "./types";
@@ -32,6 +34,20 @@ export const loginAction = createAsyncThunk(
       const res = await login(loginData);
       console.log(res);
       return res;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  }
+);
+
+export const logoutAction = createAsyncThunk(
+  "authentication/logout",
+  async (_, thunkAPI) => {
+    try {
+      const res = await logOut();
+      console.log(res);
+      return thunkAPI.dispatch(setUserId("notLoggedIn"));
     } catch (e) {
       console.log(e);
       return e;
