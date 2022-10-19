@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import { AppWrapper, Topbar } from "../../../../components";
@@ -11,8 +11,8 @@ export const IdeaList: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { uid } = useAppSelector((root) => root.authentication);
-
+  const { uid, user } = useAppSelector((root) => root.authentication);
+  const { ideas } = user;
   const handleClick = () => {
     console.log("hei");
   };
@@ -29,7 +29,18 @@ export const IdeaList: React.FC = () => {
     <AppWrapper>
       <>
         <Topbar onBack={handleClick}></Topbar>
-        <Card>First idea</Card>
+        {ideas.length > 0 ? (
+          ideas.map((idea) => {
+            return <Card key={idea.id}> {idea.name}</Card>;
+          })
+        ) : (
+          <Typography
+            variant="body1"
+            className="text-textSecondary text-center"
+          >
+            no idea yet
+          </Typography>
+        )}
         <Button onClick={handleAddIdea}> Add new idea</Button>
         <Button onClick={logout}> Logout</Button>
       </>

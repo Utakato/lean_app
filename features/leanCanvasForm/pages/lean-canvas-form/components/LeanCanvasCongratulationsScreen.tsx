@@ -15,7 +15,7 @@ export const LeanCanvasCongratulationsScreen: React.FC = () => {
     console.log("tba");
   };
   return (
-    <div className="w-full h-full flex flex-col justify-start items-center gap-10 mt-32">
+    <div className="w-full h-full flex flex-col justify-start items-center gap-10 mt-32 px-8">
       <Avatar className="w-52 h-52 bg-[#C3DCED2E] shadow-basic">
         <LightbulbIcon className="w-8/12 h-4/6 text-[#FFF48F]" />
       </Avatar>

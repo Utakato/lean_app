@@ -121,7 +121,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
             />
             <form
               id="leanCanvas"
-              className="w-full flex flex-col gap-8"
+              className="w-full flex flex-col gap-8 px-8 pt-20"
               // onSubmit={handleSubmit((data) => console.log(data))}
             >
               <QuestionData
