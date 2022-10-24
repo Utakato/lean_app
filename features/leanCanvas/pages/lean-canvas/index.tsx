@@ -1,7 +1,8 @@
 import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, Suspense } from "react";
 import { Topbar, AppWrapper, SmallCard } from "../../../../components";
+import { LoadingSpinner } from "../../../../components/layout/LoadingSpinner";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
 import { routes } from "../../../../core/routes/routes";
 import { Idea, getUserIdeasAction } from "../../../authentication";
@@ -29,15 +30,14 @@ export const LeanCavnasPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUserIdeasAction(uid));
-  }, []);
+  }, [modalInfo]);
 
   const activeIdea = useMemo(
     () => user.ideas.filter((idea) => idea.id === ideaId)[0],
     [user.ideas, ideaId]
   ) as Idea;
 
-  console.log("activeIdea", activeIdea);
-  const { name, id, leanCanvas } = activeIdea;
+  const { id, leanCanvas } = activeIdea;
 
   const handleClick = (fieldName: string) => {
     console.log("fieldNAme", fieldName);
@@ -57,79 +57,79 @@ export const LeanCavnasPage: React.FC = () => {
   };
 
   return (
-    <>
-      <Topbar onBack={handleBack} />
-      <AppWrapper>
-        <div className="p-5">
-          <Typography variant="h2" className="text-black font-medium">
-            UVP
-          </Typography>
-          {leanCanvas?.uvp ? (
-            <Button variant="text" onClick={() => handleClick("uvp")}>
-              <Typography variant="body1" className="text-black ">
-                {leanCanvas.uvp}
-              </Typography>
-            </Button>
-          ) : (
-            <Button variant="text" onClick={() => handleClick("uvp")}>
-              You have not defined your UVP yet... Click here to add one
-            </Button>
-          )}
-
-          <Typography variant="h2" className="text-black font-medium">
-            Product
-          </Typography>
-          <div className="flex flex-col gap-5 mt-5 mb-8">
-            <SmallCard
-              text="Problem"
-              onClick={() => handleClick("problem")}
-              uncompleted={!Boolean(leanCanvas.problem)}
-            />
-
-            <SmallCard
-              uncompleted={!Boolean(leanCanvas.solution)}
-              text="Solution"
-              onClick={() => handleClick("solution")}
-            />
-            <SmallCard
-              text="Cost structure"
-              onClick={() => handleClick("costs")}
-              uncompleted={!Boolean(leanCanvas.costs)}
-            />
-            <SmallCard
-              text="Key metrics"
-              onClick={() => handleClick("keyMetrics")}
-              uncompleted={!Boolean(leanCanvas.keyMetrics)}
-            />
+    <Suspense fallback={<LoadingSpinner />}>
+      <>
+        <Topbar onBack={handleBack} />
+        <AppWrapper>
+          <div className="p-5">
+            <Typography variant="h2" className="text-black font-medium">
+              UVP
+            </Typography>
+            {leanCanvas?.uvp ? (
+              <Button variant="text" onClick={() => handleClick("uvp")}>
+                <Typography variant="body1" className="text-black ">
+                  {leanCanvas.uvp}
+                </Typography>
+              </Button>
+            ) : (
+              <Button variant="text" onClick={() => handleClick("uvp")}>
+                You have not defined your UVP yet... Click here to add one
+              </Button>
+            )}
+            <Typography variant="h2" className="text-black font-medium">
+              Product
+            </Typography>
+            <div className="flex flex-col gap-5 mt-5 mb-8">
+              <SmallCard
+                text="Problem"
+                onClick={() => handleClick("problem")}
+                uncompleted={!Boolean(leanCanvas.problem)}
+              />
+              <SmallCard
+                uncompleted={!Boolean(leanCanvas.solution)}
+                text="Solution"
+                onClick={() => handleClick("solution")}
+              />
+              <SmallCard
+                text="Cost structure"
+                onClick={() => handleClick("costs")}
+                uncompleted={!Boolean(leanCanvas.costs)}
+              />
+              <SmallCard
+                text="Key metrics"
+                onClick={() => handleClick("keyMetrics")}
+                uncompleted={!Boolean(leanCanvas.keyMetrics)}
+              />
+            </div>
+            <Typography variant="h2" className="text-black font-medium">
+              Market
+            </Typography>
+            <div className="flex flex-col gap-5 mt-5 mb-8">
+              <SmallCard
+                text="Customer segments"
+                onClick={() => handleClick("customer")}
+                uncompleted={!Boolean(leanCanvas.customer)}
+              />
+              <SmallCard
+                text="Unfair advantage"
+                onClick={() => handleClick("unfairAdvantage")}
+                uncompleted={!Boolean(leanCanvas.unfairAdvantage)}
+              />
+              <SmallCard
+                text="Revenue streams"
+                onClick={() => handleClick("revenue")}
+                uncompleted={!Boolean(leanCanvas.revenue)}
+              />
+              <SmallCard
+                text="Channels"
+                onClick={() => handleClick("channels")}
+                uncompleted={!Boolean(leanCanvas.channels)}
+              />
+            </div>
           </div>
-          <Typography variant="h2" className="text-black font-medium">
-            Market
-          </Typography>
-          <div className="flex flex-col gap-5 mt-5 mb-8">
-            <SmallCard
-              text="Customer segments"
-              onClick={() => handleClick("customer")}
-              uncompleted={!Boolean(leanCanvas.customer)}
-            />
-            <SmallCard
-              text="Unfair advantage"
-              onClick={() => handleClick("unfairAdvantage")}
-              uncompleted={!Boolean(leanCanvas.unfairAdvantage)}
-            />
-            <SmallCard
-              text="Revenue streams"
-              onClick={() => handleClick("revenue")}
-              uncompleted={!Boolean(leanCanvas.revenue)}
-            />
-            <SmallCard
-              text="Channels"
-              onClick={() => handleClick("channels")}
-              uncompleted={!Boolean(leanCanvas.channels)}
-            />
-          </div>
-        </div>
-      </AppWrapper>
-      <LeanQuestionModal modalInfo={modalInfo} onClose={handleModalClose} />
-    </>
+        </AppWrapper>
+        <LeanQuestionModal modalInfo={modalInfo} onClose={handleModalClose} />
+      </>
+    </Suspense>
   );
 };

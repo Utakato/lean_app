@@ -2,6 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { LoadingSpinner } from "../../../components/layout/LoadingSpinner";
 import { firebaseApp } from "../../../core/firebase";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
 import { routes, unprotectedRoutes } from "../../../core/routes/routes";
@@ -64,9 +65,7 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
       ) : loginStatus === LoginStatus.FULFILLED ? (
         children
       ) : (
-        <div className="flex justify-center items-center w-screen h-screen">
-          <CircularProgress className="w-32 h-32" />
-        </div>
+        <LoadingSpinner />
       )}
     </>
   );
