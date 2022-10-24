@@ -80,18 +80,26 @@ export const LeanCavnasPage: React.FC = () => {
             Product
           </Typography>
           <div className="flex flex-col gap-5 mt-5 mb-8">
-            <SmallCard text="Problem" onClick={() => handleClick("problem")} />
             <SmallCard
+              text="Problem"
+              onClick={() => handleClick("problem")}
+              uncompleted={!Boolean(leanCanvas.problem)}
+            />
+
+            <SmallCard
+              uncompleted={!Boolean(leanCanvas.solution)}
               text="Solution"
               onClick={() => handleClick("solution")}
             />
             <SmallCard
               text="Cost structure"
               onClick={() => handleClick("costs")}
+              uncompleted={!Boolean(leanCanvas.costs)}
             />
             <SmallCard
               text="Key metrics"
               onClick={() => handleClick("keyMetrics")}
+              uncompleted={!Boolean(leanCanvas.keyMetrics)}
             />
           </div>
           <Typography variant="h2" className="text-black font-medium">
@@ -101,18 +109,22 @@ export const LeanCavnasPage: React.FC = () => {
             <SmallCard
               text="Customer segments"
               onClick={() => handleClick("customer")}
+              uncompleted={!Boolean(leanCanvas.customer)}
             />
             <SmallCard
               text="Unfair advantage"
               onClick={() => handleClick("unfairAdvantage")}
+              uncompleted={!Boolean(leanCanvas.unfairAdvantage)}
             />
             <SmallCard
               text="Revenue streams"
               onClick={() => handleClick("revenue")}
+              uncompleted={!Boolean(leanCanvas.revenue)}
             />
             <SmallCard
               text="Channels"
               onClick={() => handleClick("channels")}
+              uncompleted={!Boolean(leanCanvas.channels)}
             />
           </div>
         </div>

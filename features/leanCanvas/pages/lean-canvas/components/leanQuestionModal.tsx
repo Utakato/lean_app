@@ -55,15 +55,9 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
   ) as Idea;
 
   useEffect(() => {
-    if (activeIdea) {
-      if (currentQuestion.fieldName === "name") {
-        const currentAnswer = activeIdea.name;
-        setValue(currentAnswer as string);
-      }
-      if (activeIdea?.leanCanvas?.[currentQuestion.fieldName]) {
-        const currentAnswer = activeIdea.leanCanvas[currentQuestion.fieldName];
-        setValue(currentAnswer as string);
-      }
+    if (activeIdea?.leanCanvas?.[currentQuestion.fieldName]) {
+      const currentAnswer = activeIdea.leanCanvas[currentQuestion.fieldName];
+      setValue(currentAnswer as string);
     }
   }, [activeIdea, currentQuestion]);
 
@@ -83,7 +77,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
     };
     console.log(data);
     const res = await addNewIdeaField(data);
-    onClose();
+    handleSecondary();
   };
 
   const onChange = (e: any) => {
@@ -94,6 +88,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
     // This creates some MUI trapfocus ref error if given directly to secondaryHandler on FormButtons
     // probably not this, this happened on some other
     onClose();
+    setValue("");
   };
 
   return (
@@ -103,7 +98,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
           <LeanCanvasCongratulationsScreen />
         ) : (
           <>
-            <Topbar onBack={onClose} otherStyles="absolute top-0" />
+            <Topbar onBack={handleSecondary} otherStyles="absolute top-0" />
             <form
               // id="leanCanvas"
               className="w-full flex flex-col gap-8 px-5 pt-20"

@@ -18,6 +18,11 @@ export const IdeaDashboardPage: React.FC = () => {
     [user.ideas, ideaId]
   ) as Idea;
 
+  let leanCanvasCompletedQuestions = 0;
+  if (activeIdea?.leanCanvas) {
+    leanCanvasCompletedQuestions = Object.keys(activeIdea.leanCanvas).length;
+  }
+
   useEffect(() => {
     dispatch(getUserIdeasAction(uid));
   }, []);
@@ -32,12 +37,15 @@ export const IdeaDashboardPage: React.FC = () => {
           <Topbar onBack={() => router.push(routes.dashboard)} />
           <div className="flex flex-col justify-start items-start w-full h-full gap-8 px-5 pt-5">
             <Typography variant="h2" className="text-black font-medium">
-              {activeIdea.name}
+              {activeIdea?.name}
             </Typography>
             <div className="flex w-full gap-4">
               <BoxButton onClick={handleLeanCanvasClick}>
                 <Typography variant="h3" className="font-medium">
                   Lean Canvas
+                </Typography>
+                <Typography variant="h3" className="font-medium">
+                  {leanCanvasCompletedQuestions} / 8
                 </Typography>
               </BoxButton>
               <BoxButton disabled onClick={() => console.log("tba")}>

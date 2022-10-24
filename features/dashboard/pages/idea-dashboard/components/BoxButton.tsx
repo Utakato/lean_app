@@ -16,7 +16,7 @@ export const BoxButton: React.FC<BoxButtonProps> = ({
     <Button
       disabled={disabled}
       variant="contained"
-      className="bg-secondary text-white w-full aspect-square rounded-lg"
+      className="bg-secondary text-white w-full aspect-square rounded-lg flex flex-col justify-center items-center gap-2"
       onClick={onClick}
     >
       {children}
