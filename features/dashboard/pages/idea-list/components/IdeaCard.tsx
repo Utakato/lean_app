@@ -24,7 +24,10 @@ export const IdeaCard: React.FC<IdeaCardProps> = ({
   };
 
   return (
-    <Card className="flex flex-col items-start gap-2 p-4" onClick={handleClick}>
+    <Card
+      className="flex flex-col items-start gap-2 p-4 bg-white"
+      onClick={handleClick}
+    >
       <Typography variant="h4">{name}</Typography>
       <Typography variant="body2">{uvp}</Typography>
       {initialValidationComplete && (
