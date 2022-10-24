@@ -3,9 +3,9 @@ import React from "react";
 
 interface FormButtonsProps {
   primaryText: string;
-  secondaryText: string;
+  secondaryText?: string;
   primaryHandler: (e: any) => void;
-  secondaryHandler: () => void;
+  secondaryHandler?: () => void;
   formId: string;
   disabledPrimary: boolean;
 }
@@ -20,13 +20,17 @@ export const FormButtons: React.FC<FormButtonsProps> = ({
 }) => {
   return (
     <div className="flex justify-between w-full">
-      <Button
-        variant="outlined"
-        onClick={secondaryHandler}
-        className="w-5/12 flex justify-center items-center"
-      >
-        <Typography variant="h4">{secondaryText}</Typography>
-      </Button>
+      {secondaryText && secondaryHandler ? (
+        <Button
+          variant="outlined"
+          onClick={secondaryHandler}
+          className="w-5/12 flex justify-center items-center"
+        >
+          <Typography variant="h4">{secondaryText}</Typography>
+        </Button>
+      ) : (
+        <div></div>
+      )}
       <Button
         variant="contained"
         type="submit"

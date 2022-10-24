@@ -45,6 +45,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const { uid, user } = useAppSelector((root) => root.authentication);
 
   const currentQuestion = leanCanvasQuestions[step];
+  const isNameQuestion = currentQuestion.fieldName === "name";
   const isMultiline = currentQuestion.inputType === inputType.MULTILINE;
   const totalQuestionsCount = leanCanvasQuestions.length;
   const inputIsEmpty = value.length === 0;
@@ -63,7 +64,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
 
   useEffect(() => {
     if (activeIdea) {
-      if (currentQuestion.fieldName === "name") {
+      if (isNameQuestion) {
         const currentAnswer = activeIdea.name;
         if (currentAnswer !== undefined) {
           setValue(currentAnswer as string);
@@ -130,7 +131,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
             />
             <form
               id="leanCanvas"
-              className="w-full flex flex-col gap-8 px-8 pt-20"
+              className="w-full flex flex-col gap-8 px-8 py-20"
               onSubmit={handleSubmit((data) => console.log(data))}
             >
               <QuestionData
@@ -162,9 +163,11 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
                   disabledPrimary={inputIsEmpty}
                   formId="leanCanvas"
                   primaryText="Next"
-                  secondaryText="Skip"
+                  secondaryText={isNameQuestion ? undefined : "Skip"}
                   primaryHandler={(e) => handlePrimary(e)}
-                  secondaryHandler={handleSecondary}
+                  secondaryHandler={
+                    isNameQuestion ? undefined : handleSecondary
+                  }
                 />
               </div>
             </form>

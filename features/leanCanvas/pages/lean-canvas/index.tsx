@@ -27,18 +27,20 @@ export const LeanCavnasPage: React.FC = () => {
   const { uid, user } = useAppSelector((root) => root.authentication);
   const { ideaId } = router.query;
 
+  useEffect(() => {
+    dispatch(getUserIdeasAction(uid));
+  }, []);
+
   const activeIdea = useMemo(
     () => user.ideas.filter((idea) => idea.id === ideaId)[0],
     [user.ideas, ideaId]
   ) as Idea;
 
+  console.log("activeIdea", activeIdea);
   const { name, id, leanCanvas } = activeIdea;
 
-  useEffect(() => {
-    dispatch(getUserIdeasAction(uid));
-  }, []);
-
   const handleClick = (fieldName: string) => {
+    console.log("fieldNAme", fieldName);
     // @ts-ignore
     const step = CanvasFieldsIndexes[fieldName];
     setModalInfo({ open: true, step: step });
@@ -58,11 +60,11 @@ export const LeanCavnasPage: React.FC = () => {
     <>
       <Topbar onBack={handleBack} />
       <AppWrapper>
-        <div>
+        <div className="p-5">
           <Typography variant="h2" className="text-black font-medium">
             UVP
           </Typography>
-          {leanCanvas.uvp ? (
+          {leanCanvas?.uvp ? (
             <Button variant="text" onClick={() => handleClick("uvp")}>
               <Typography variant="body1" className="text-black ">
                 {leanCanvas.uvp}
@@ -98,7 +100,7 @@ export const LeanCavnasPage: React.FC = () => {
           <div className="flex flex-col gap-5 mt-5 mb-8">
             <SmallCard
               text="Customer segments"
-              onClick={() => handleClick("customerSegments")}
+              onClick={() => handleClick("customer")}
             />
             <SmallCard
               text="Unfair advantage"
@@ -106,7 +108,7 @@ export const LeanCavnasPage: React.FC = () => {
             />
             <SmallCard
               text="Revenue streams"
-              onClick={() => handleClick("revenueStreans")}
+              onClick={() => handleClick("revenue")}
             />
             <SmallCard
               text="Channels"

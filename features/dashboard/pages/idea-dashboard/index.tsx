@@ -29,7 +29,7 @@ export const IdeaDashboardPage: React.FC = () => {
     <>
       <AppWrapper>
         <>
-          <Topbar onBack={() => console.log("tba")} />
+          <Topbar onBack={() => router.push(routes.dashboard)} />
           <div className="flex flex-col justify-start items-start w-full h-full gap-8 px-5 pt-5">
             <Typography variant="h2" className="text-black font-medium">
               {activeIdea.name}

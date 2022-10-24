@@ -44,9 +44,10 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
   const { uid, user } = useAppSelector((root) => root.authentication);
   const { open, step } = modalInfo;
   const currentQuestion = leanCanvasQuestions[step];
+  console.log(step);
   const isMultiline = currentQuestion.inputType === inputType.MULTILINE;
   const totalQuestionsCount = leanCanvasQuestions.length;
-  const inputIsEmpty = value.length === 0;
+  const inputIsEmpty = value?.length === 0;
   const { ideaId } = router.query;
   const activeIdea = useMemo(
     () => user.ideas.filter((idea) => idea.id === ideaId)[0],
@@ -59,7 +60,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
         const currentAnswer = activeIdea.name;
         setValue(currentAnswer as string);
       }
-      if (activeIdea?.leanCanvas[currentQuestion.fieldName]) {
+      if (activeIdea?.leanCanvas?.[currentQuestion.fieldName]) {
         const currentAnswer = activeIdea.leanCanvas[currentQuestion.fieldName];
         setValue(currentAnswer as string);
       }
@@ -105,7 +106,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
             <Topbar onBack={onClose} otherStyles="absolute top-0" />
             <form
               // id="leanCanvas"
-              className="w-full flex flex-col gap-8"
+              className="w-full flex flex-col gap-8 px-5 pt-20"
               // onSubmit={handleSubmit((data) => console.log(data))}
             >
               <QuestionData

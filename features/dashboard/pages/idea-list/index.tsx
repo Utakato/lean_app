@@ -30,7 +30,10 @@ export const IdeaList: React.FC = () => {
     <AppWrapper>
       <>
         <Topbar onBack={handleClick} />
-        <div className="">
+        <div className="flex flex-col gap-5 px-5 py-5">
+          <Typography variant="h2" className="text-black font-normal">
+            Projects
+          </Typography>
           {ideas.length > 0 ? (
             ideas.map((idea) => {
               return (
@@ -50,7 +53,9 @@ export const IdeaList: React.FC = () => {
               no idea yet
             </Typography>
           )}
-          <Button onClick={handleAddIdea}> Add new idea</Button>
+          <Button variant="contained" onClick={handleAddIdea}>
+            Add new idea
+          </Button>
           <Button onClick={logout}> Logout</Button>
         </div>
       </>
