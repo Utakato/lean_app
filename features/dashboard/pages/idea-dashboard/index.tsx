@@ -27,37 +27,39 @@ export const IdeaDashboardPage: React.FC = () => {
   };
   return (
     <>
-      <Topbar onBack={() => console.log("tba")} />
       <AppWrapper>
-        <div className="flex flex-col justify-start items-start w-full h-full gap-8">
-          <Typography variant="h2" className="text-black font-medium">
-            {activeIdea.name}
-          </Typography>
-          <div className="flex w-full gap-4">
-            <BoxButton onClick={handleLeanCanvasClick}>
-              <Typography variant="h3" className="font-medium">
-                Lean Canvas
-              </Typography>
-            </BoxButton>
-            <BoxButton disabled onClick={() => console.log("tba")}>
-              <Typography variant="h3" className="font-medium">
-                Notes
-              </Typography>
-            </BoxButton>
-          </div>
-          <Typography variant="h2" className="text-black font-medium">
-            {"Validation"}
-          </Typography>
-          <ProgressCard total={6} current={1}>
-            <div>
-              <Typography variant="h4">Initial Validation: 0/6</Typography>
-              <Typography variant="body2" className="text-left">
-                {" "}
-                little text
-              </Typography>
+        <>
+          <Topbar onBack={() => console.log("tba")} />
+          <div className="flex flex-col justify-start items-start w-full h-full gap-8 px-5 pt-5">
+            <Typography variant="h2" className="text-black font-medium">
+              {activeIdea.name}
+            </Typography>
+            <div className="flex w-full gap-4">
+              <BoxButton onClick={handleLeanCanvasClick}>
+                <Typography variant="h3" className="font-medium">
+                  Lean Canvas
+                </Typography>
+              </BoxButton>
+              <BoxButton disabled onClick={() => console.log("tba")}>
+                <Typography variant="h3" className="font-medium">
+                  Notes
+                </Typography>
+              </BoxButton>
             </div>
-          </ProgressCard>
-        </div>
+            <Typography variant="h2" className="text-black font-medium">
+              {"Validation"}
+            </Typography>
+            <ProgressCard total={6} current={1}>
+              <div>
+                <Typography variant="h4">Initial Validation: 0/6</Typography>
+                <Typography variant="body2" className="text-left">
+                  {" "}
+                  little text
+                </Typography>
+              </div>
+            </ProgressCard>
+          </div>
+        </>
       </AppWrapper>
     </>
   );

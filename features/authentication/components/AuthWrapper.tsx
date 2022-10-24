@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { firebaseApp } from "../../../core/firebase";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
 import { routes, unprotectedRoutes } from "../../../core/routes/routes";
-import { setUserId, getUserAction } from "../redux";
+import { setUserId, getUserAction, getUserIdeasAction } from "../redux";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -51,7 +51,12 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
     }
   }, [loginStatus]);
 
-  console.log(loginStatus);
+  useEffect(() => {
+    if (loginStatus === LoginStatus.FULFILLED) {
+      dispatch(getUserIdeasAction(uid));
+    }
+  }, [loginStatus]);
+
   return (
     <>
       {routeIsUnprotected ? (

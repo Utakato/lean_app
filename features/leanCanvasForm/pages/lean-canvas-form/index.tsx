@@ -1,6 +1,7 @@
 import { TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   AppWrapper,
   FormButtons,
@@ -35,6 +36,7 @@ const createPayload = (key: string, value: string) => {
 export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
   const [step, setStep] = useState(0);
   const [value, setValue] = useState("");
   const [displayCongratulationsScreen, setDisplayCongratulationsScreen] =
@@ -47,10 +49,17 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
   const totalQuestionsCount = leanCanvasQuestions.length;
   const inputIsEmpty = value.length === 0;
   const { ideaId } = router.query;
+
   const activeIdea = useMemo(
     () => user.ideas.filter((idea) => idea.id === ideaId)[0],
     [user.ideas, ideaId]
   ) as Idea;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (activeIdea) {
@@ -122,7 +131,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
             <form
               id="leanCanvas"
               className="w-full flex flex-col gap-8 px-8 pt-20"
-              // onSubmit={handleSubmit((data) => console.log(data))}
+              onSubmit={handleSubmit((data) => console.log(data))}
             >
               <QuestionData
                 title={currentQuestion.title}
@@ -142,7 +151,7 @@ export const LeanCanvasForm: React.FC<LeanCanvasFormProps> = ({}) => {
                 autoFocus
                 placeholder={currentQuestion.title}
                 required
-                // {...register(currentQuestion.fieldName)}
+                {...register(currentQuestion.fieldName)}
                 onChange={onChange}
                 value={value}
               />
