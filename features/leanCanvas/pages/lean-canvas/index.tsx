@@ -44,6 +44,9 @@ export const LeanCavnasPage: React.FC = () => {
     // @ts-ignore
     const step = CanvasFieldsIndexes[fieldName];
     setModalInfo({ open: true, step: step });
+    // Probably this creates bug in leanQuestionModal where you can see the previous step input
+    // Maybe having 2 separate states for open and step will solve this
+    // First set step then set open
   };
 
   const handleModalClose = () => {
@@ -66,8 +69,12 @@ export const LeanCavnasPage: React.FC = () => {
               UVP
             </Typography>
             {leanCanvas?.uvp ? (
-              <Button variant="text" onClick={() => handleClick("uvp")}>
-                <Typography variant="body1" className="text-black ">
+              <Button
+                variant="text"
+                onClick={() => handleClick("uvp")}
+                className="p-0 mt-2 mb-5"
+              >
+                <Typography variant="body1" className="text-black text-left">
                   {leanCanvas.uvp}
                 </Typography>
               </Button>

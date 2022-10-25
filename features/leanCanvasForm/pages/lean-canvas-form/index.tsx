@@ -11,7 +11,7 @@ import {
 } from "../../../../components";
 import { addNewIdeaField } from "../../../../core/api/lean-canvas";
 
-import { leanCanvasQuestions } from "../../../../core/constants/LeanCanvasQuestions";
+import { leanCanvasQuestions } from "../../../../core/constants/LeanCanvasContent";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
 import {
   getUserAction,

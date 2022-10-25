@@ -9,6 +9,7 @@ interface IdeaCardProps {
   uvp: string;
   initialValidationComplete?: number;
   id: string;
+  leanCanvas?: any;
 }
 
 export const IdeaCard: React.FC<IdeaCardProps> = ({
@@ -16,12 +17,18 @@ export const IdeaCard: React.FC<IdeaCardProps> = ({
   uvp,
   id,
   initialValidationComplete,
+  leanCanvas,
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push(routes.ideaDashboard(id));
   };
+
+  let leanCanvasCompletedQuestions = 0;
+  if (leanCanvas) {
+    leanCanvasCompletedQuestions = Object.keys(leanCanvas).length;
+  }
 
   return (
     <Card
@@ -30,6 +37,11 @@ export const IdeaCard: React.FC<IdeaCardProps> = ({
     >
       <Typography variant="h4">{name}</Typography>
       <Typography variant="body2">{uvp}</Typography>
+
+      <Typography variant="body2">
+        Lean Canvas: {leanCanvasCompletedQuestions} / 9
+      </Typography>
+
       {initialValidationComplete && (
         <ProgressBar
           current={initialValidationComplete}

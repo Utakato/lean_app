@@ -44,6 +44,7 @@ export const IdeaList: React.FC = () => {
                     id={idea.id}
                     name={idea.name}
                     uvp={idea.leanCanvas?.uvp}
+                    leanCanvas={idea.leanCanvas ? idea.leanCanvas : undefined}
                   />
                 );
               })

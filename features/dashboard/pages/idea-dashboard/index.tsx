@@ -45,7 +45,7 @@ export const IdeaDashboardPage: React.FC = () => {
                   Lean Canvas
                 </Typography>
                 <Typography variant="h3" className="font-medium">
-                  {leanCanvasCompletedQuestions} / 8
+                  {leanCanvasCompletedQuestions} / 9
                 </Typography>
               </BoxButton>
               <BoxButton disabled onClick={() => console.log("tba")}>
@@ -57,15 +57,23 @@ export const IdeaDashboardPage: React.FC = () => {
             <Typography variant="h2" className="text-black font-medium">
               {"Validation"}
             </Typography>
-            <ProgressCard total={6} current={1}>
-              <div>
-                <Typography variant="h4">Initial Validation: 0/6</Typography>
-                <Typography variant="body2" className="text-left">
-                  {" "}
-                  little text
+
+            <div className="flex flex-col gap-2 w-full">
+              <ProgressCard total={6} current={1}>
+                <div>
+                  <Typography variant="h4">Initial Validation: 0/6</Typography>
+                  <Typography variant="body2" className="text-left">
+                    {" "}
+                    little text
+                  </Typography>
+                </div>
+              </ProgressCard>
+              {leanCanvasCompletedQuestions !== 9 && (
+                <Typography variant="body1" className="text-textSecondary">
+                  Unlocked by completing Lean Canvas
                 </Typography>
-              </div>
-            </ProgressCard>
+              )}
+            </div>
           </div>
         </>
       </AppWrapper>
