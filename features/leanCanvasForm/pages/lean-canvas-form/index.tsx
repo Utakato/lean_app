@@ -13,11 +13,7 @@ import { addNewIdeaField } from "../../../../core/api/lean-canvas";
 
 import { leanCanvasQuestions } from "../../../../core/constants/LeanCanvasContent";
 import { useAppDispatch, useAppSelector } from "../../../../core/redux/store";
-import {
-  getUserAction,
-  getUserIdeasAction,
-  Idea,
-} from "../../../authentication";
+import { getUserIdeasAction, Idea } from "../../../authentication";
 import { LeanCanvasCongratulationsScreen } from "./components/LeanCanvasCongratulationsScreen";
 
 enum inputType {

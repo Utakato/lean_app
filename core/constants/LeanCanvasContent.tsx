@@ -31,7 +31,7 @@ export const leanCanvasQuestions: LeanCanvasQuestion[] = [
     fieldName: "problem",
     title: "Define the problems that you want to solve",
     description:
-      "You should define here one or more problems people have that you are willing to solve.",
+      "Each customer segment (CS) you are thinking to work with will have a set of problems that they need solving.\nIn this box try listing the one to three high priority problems that you CS has.\n\nWithout a problem to solve, you don’t have a product/service to offer.",
     inputType: inputType.MULTILINE,
   },
   {
@@ -44,14 +44,15 @@ export const leanCanvasQuestions: LeanCanvasQuestion[] = [
   {
     fieldName: "solution",
     title: "Define your solution",
-    description: "Solution...............",
+    description:
+      "Finding a solution to the problem is the golden egg! You’re not going to get this right off the first bat — it’s OK, as that’s what Lean is all about.\n\nWhat you need to do is Get Out The Building — a phrase coined by the godfather of Lean Startup, Steve Blanks.\n\nAnd what Blank’s here is that the solution is not in your office, it’s out there in the streets. So go interview your customer segment, ask them questions, and take those learnings.\n\nRemember the Lean Startup is validated learning through a continual Build — Measure — Learn cycle.",
     inputType: inputType.MULTILINE,
   },
   {
     fieldName: "uvp",
     title: "Define your UVP & high-level concept",
     description:
-      "UVP is the shorthand unique value proposition and represents............",
+      "In the middle of the canvas is the UVP.\n\nA value proposition is a promise of value to be delivered. It’s the primary reason a prospect should buy from you.\n\nA way to get your head around this is to think why are you different and why should your CS buy/invest time in you.\n\nFor further reading click on the info button.",
     inputType: inputType.MULTILINE,
     modalComponent: <div></div>,
   },
@@ -59,14 +60,14 @@ export const leanCanvasQuestions: LeanCanvasQuestion[] = [
     fieldName: "revenue",
     title: "Define your possible revenue streams",
     description:
-      "Like direct sales, distribution in store chains, subscriptions ....",
+      "How you price your business will depend on the type of model it is, however, it’s quite common for startups to lower their cost, even offer it for free to gain traction.\n\nHowever, this can pose a few problems. The key being it actually delays/avoids validation. Getting people to sign up for something for free is a lot different than asking them to pay. There is also the idea of perceived value.",
     inputType: inputType.MULTILINE,
   },
   {
     fieldName: "channels",
     title: "Define your communication channels.",
     description:
-      "The methods you will use to reach your customers. Social media, google ads, fb ads, influencers .....",
+      "Channels are ways for you to reach your CS (customer segments).\n\nAnd remember that in the initial stages, it’s important not to think about scale but to focus on learning. With that in mind, try to think about which channels will give you enough access to your CS at the same time give you enough learning.\n\nChannels can be email, social, CPC ads, blogs, articles, trade shows, radio & TV, webinars etc.\n\nBTW, you don’t have to be on all of them, just where your CS are.",
     inputType: inputType.MULTILINE,
   },
   {
@@ -80,7 +81,7 @@ export const leanCanvasQuestions: LeanCanvasQuestion[] = [
     fieldName: "costs",
     title: "Identify your costs",
     description:
-      "Here you should list the costs that your business idea has like product development, salaries ........",
+      "Here you should list all the operational costs for taking this business to market.\n\nHow much will it cost to build / landing page? What is your burn rate — your total monthly running costs?\nHow much will it cost to interview your customer segment?\nHow much do market research papers cost? etc.\n\nYou can then use these costs and potential revenue streams to calculate a rough break-even point.",
     inputType: inputType.MULTILINE,
   },
   {

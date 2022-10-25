@@ -5,7 +5,6 @@ import {
   AppWrapper,
   Topbar,
   QuestionData,
-  ProgressBar,
   FormButtons,
 } from "../../../../../components";
 import { addNewIdeaField } from "../../../../../core/api/lean-canvas";
@@ -44,7 +43,7 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
   const { uid, user } = useAppSelector((root) => root.authentication);
   const { open, step } = modalInfo;
   const currentQuestion = leanCanvasQuestions[step];
-  console.log(step);
+
   const isMultiline = currentQuestion.inputType === inputType.MULTILINE;
   const totalQuestionsCount = leanCanvasQuestions.length;
   const inputIsEmpty = value?.length === 0;
