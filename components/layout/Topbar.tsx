@@ -10,9 +10,9 @@ interface TopbarProps {
 export const Topbar: React.FC<TopbarProps> = ({ onBack, otherStyles }) => {
   return (
     <div
-      className={`w-full h-12 bg-secondary flex justify-between box-border px-8 items-center ${otherStyles}`}
+      className={`w-full h-12 bg-secondary flex justify-between box-border px-5 items-center ${otherStyles}`}
     >
-      <IconButton onClick={onBack}>
+      <IconButton onClick={onBack} className="text-white">
         <ArrowBackIcon />
       </IconButton>
       <div></div>
