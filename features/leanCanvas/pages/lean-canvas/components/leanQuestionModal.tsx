@@ -1,4 +1,4 @@
-import { Typography, TextField, Modal } from "@mui/material";
+import { Typography, TextField, Modal, TextareaAutosize } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState, useMemo, useEffect } from "react";
 import {
@@ -114,16 +114,17 @@ export const LeanQuestionModal: React.FC<LeanQuestionModalProps> = ({
                   {currentQuestion.description}
                 </Typography>
               </QuestionData>
-              <TextField
-                multiline={isMultiline}
-                rows="4"
-                fullWidth
+              <TextareaAutosize
+                minRows="4"
                 autoFocus
                 placeholder={currentQuestion.title}
                 required
                 // {...register(currentQuestion.fieldName)}
                 onChange={onChange}
                 value={value}
+                className={
+                  "bg-white text-black border-2 focus:outline-none rounded-md p-2"
+                }
               />
               <div className="flex flex-col w-full items-center gap-5">
                 <FormButtons
